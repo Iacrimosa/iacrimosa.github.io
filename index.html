@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pardus</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<div id="fake-body"></div>
+
+<div id="alert"></div>
+<script>
+/*blue, green, yellow, red*/
+function notif(content, color)
+{
+	document.getElementById('alert').innerHTML = '<div class="alert '+color+'">'+content+'</div>';
+}
+</script>
+
+<!-- home screen start -->
+<div id="home" onclick="_home()">
+	<script type="text/javascript">
+	var backgrounds = [
+		"jake-allison-1273456-unsplash.jpg",
+		"natalie-riedel-1312982-unsplash.jpg",
+		"lena-l-366151-unsplash.jpg",
+		"luca-zanon-26595-unsplash.jpg",
+		"reuben-teo-1274717-unsplash.jpg",
+		"engin-eselioglu-653697-unsplash.jpg",
+	];
+	var e = backgrounds.length;
+	var i = 0;
+	function changeBG(){
+		document.getElementById("fake-body").style.backgroundImage="url(backgrounds/"+backgrounds[i]+")";
+		document.getElementById("home").style.backgroundImage="url(backgrounds/"+backgrounds[i]+")";
+		if(i<e-1) i++;
+		else i=0;
+	}
+	</script>
+	<label id="clock">16:18</label>
+	<label id="date">31 Ocak 2019 Perşembe</label>
+	<div id="notifications">
+		<div class="notification"><b>Pil %23</b><br>Bilgisayarınızın pili bitmek üzere! Şarj cihazını bağlayın.</div>
+		<div class="notification"><b>Hava durumu</b><br>Bulutlu 18°C (İstanbul)</div>
+		<div class="notification" onclick="changeBG()">Arkaplanı değiştirmek için basın (deneysel)</div>
+	</div>
+
+	<label id="open" onclick="home()">Açmak için "boşluk" tuşuna basın yada dokunun</label>
+	<script>
+	function home() {
+		document.getElementById("home").style.opacity = 0;
+		document.getElementById("home").style.zIndex = -50;
+		document.getElementById("wrapper").style.display = "block";
+		document.getElementById("go-home").style.zIndex = 55;
+		document.getElementById("options-btn").style.zIndex = 55;
+		document.getElementById("languages-btn").style.zIndex = 55;
+
+		document.getElementById("widget-right").style.opacity = 0;
+		document.getElementById("widget-right").style.zIndex = -55;
+		// selectUser();
+	}
+	function lock(){
+		document.getElementById("home").style.opacity = 1;
+		document.getElementById("home").style.zIndex = 50;
+		document.getElementById("go-home").style.zIndex = -55;
+		document.getElementById("options-btn").style.zIndex = -55;
+		document.getElementById("languages-btn").style.zIndex = -55;
+	}
+	document.body.onkeyup = function(e){
+		if(e.keyCode == 32 ||  e.keyCode == 13 /*|| e.keyCode == 9*/)
+			home();
+	}
+	</script>
+</div>
+<!-- home screen end -->
+
+<label for="" id="go-home" onclick="lock()">Anasayfa</label>
+
+<div id="options-btn" class="drp options">
+	<ul id="sh1" style="display:none">
+		<li class="hibernate" onclick="sh1()">Uykuya al</li>
+		<li class="restart" onclick="sh1()">Yeniden başlat</li>
+		<li class="shutdown" onclick="sh1()">Bilgisayarı kapat</li>
+	</ul>
+	<label for="" class="drp-btn" onclick="sh1()">Seçenekler</label>
+	<script>
+	function sh1(){
+		var x = document.getElementById("sh1");
+		if(x.style.display === "none"){
+			x.style.display = "block";
+		}else {
+			x.style.display = "none";
+		}
+	}
+	</script>
+</div>
+
+<div id="languages-btn" class="drp languages" style="z-index:-55;">
+	<ul id="sh2" style="display:none;">
+		<li onclick="changeLanguageButton('EN')">English</li>
+		<li onclick="changeLanguageButton('ESP')">Español</li>
+		<li onclick="changeLanguageButton('TUR')">Türkçe</li>
+	</ul>
+	<label id="label-lang" class="drp-btn" onclick="changeLanguageButton()">TUR</label>
+	<script>
+	function changeLanguageButton(lang=""){
+		if(!lang=="")
+			document.getElementById("label-lang").innerText = lang;
+		var x = document.getElementById("sh2");
+		if(x.style.display === "none"){
+			x.style.display = "block";
+		}else {
+			x.style.display = "none";
+		}
+	}
+	</script>
+</div>
+
+<!-- wrapper start -->
+<div id="wrapper" style="display:none">
+
+	<div id="profile">
+		<div id="profile-photo" onclick="changeUser()">
+			<!-- <label id="profile-change"></label> -->
+		</div>
+		<label id="profile-username" onclick="changeUser()">pardus</label>
+	</div>
+
+	<!-- login form start -->
+	<form id="form-login" style="_display:none">
+		<input id="username" class="" type="text" name="" onchange="changeProfileUsername(this)" placeholder="kullanıcı adı">
+		<script>
+		function changeProfileUsername(obj){
+			document.getElementById("profile-username").innerHTML = obj.value;
+		}
+        </script>
+		<input class="icon" type="password" name="" id="password" placeholder="şifre">
+
+		<input id="cb-password" type="checkbox" name="" value='valuable' onclick="passShowHide()"/>
+		<label for="cb-password"></label>
+
+		<script>
+		function passShowHide(){
+			document.getElementById("password").focus();
+			var x = document.getElementById("password");
+			if (x.type === "password") x.type = "text";
+			else x.type = "password";
+		}
+		</script>
+		
+		<select id="desktop-list">
+			<option value="0">GNOME</option>
+			<option value="1">XFCE</option>
+			<option value="2">KDE</option>
+			<option value="3">Cinnamon</option>
+			<option value="4">DDE</option>
+		</select>
+		
+		<button class="btn-login" type="reset" onclick="notif('Girdiğiniz bilgiler yanlış!','red')">giriş</button>
+
+		<span onclick="changePass()">Şifreyi değiştir</span>
+	</form>
+	<!-- login form end -->
+
+	<!-- pass change start -->
+	<form id="form-new-pass" class="tab" style="z-index:-100;opacity:0">
+		<input type="password" name="" id="old-pass" class="br" placeholder="eski şifre">
+		<input type="password" name="" id="new-pass" class="br" placeholder="yeni şifre">
+		<input type="password" name="" id="new-pass-repeat" class="br" placeholder="yeni şifre tekrar">
+		<button class="cancel" type="reset" onclick="selectUser()">iptal</button>
+		<button class="btn-login update" type="reset" onclick="notif('Şifreniz başarıyla değiştirildi!','green')">güncelle</button>
+	</form>
+	<!-- pass change end -->
+
+	<!-- user list start -->
+	<div id="users" style="display:none">
+		<ul>
+			<li onclick="selectUser('johndoe')"><div class="pp"></div>John Doe</li>
+			<li onclick="selectUser('janedoe')"><div class="pp"></div>Jane Doe</li>
+			<li onclick="selectUser('pardus')"><div class="pp"></div>pardus</li>
+			<li id="manual-user" onclick="manualUser()">+ manuel giriş</li>
+		</ul>
+	</div>
+	<!-- user list end -->
+
+</div>
+<!-- wrapper end -->
+
+<script>
+	function changeUser(){
+		var d = document.getElementById("form-login");
+		var e = document.getElementById("users");
+		var c = document.getElementById("form-new-pass");
+		d.style.display = "none";
+		e.style.display = "inherit";
+		c.style.display = "none";
+			// d.classList.add("display-none");
+			// e.classList.add("display-inherit");
+	}
+	function selectUser(un="pardus"){
+		document.getElementById("users").style.display = "none";
+		document.getElementById("username").style.display = "none";
+		document.getElementById("form-login").style.display = "block";
+		document.getElementById("password").focus();
+		document.getElementById("profile-username").innerText = un;
+		document.getElementById("form-new-pass").style.display="none";
+		// document.getElementById("form-login").reset();
+	}
+	function manualUser(){
+		document.getElementById("users").style.display = "none";
+		document.getElementById("username").style.display = "block";
+		document.getElementById("form-login").style.display = "block";
+		document.getElementById("username").focus();
+		document.getElementById("profile-username").innerText = "manuel kullanıcı";
+	}
+	function changePass(){
+		document.getElementById("form-login").style.display="none";
+		document.getElementById("users").style.display="none";
+		document.getElementById("form-new-pass").style.opacity=1;
+		document.getElementById("form-new-pass").style.zIndex=111;
+		document.getElementById("form-new-pass").style.display="block";
+		document.getElementById("old-pass").focus();
+	}
+</script>
+
+</body> 
+</html>
