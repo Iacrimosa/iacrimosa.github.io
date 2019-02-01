@@ -43,9 +43,47 @@ function notif(content, color)
 	<label id="clock">16:18</label>
 	<label id="date">31 Ocak 2019 Perşembe</label>
 	<div id="notifications">
-		<div class="notification"><b>Pil %23</b><br>Bilgisayarınızın pili bitmek üzere! Şarj cihazını bağlayın.</div>
-		<div class="notification"><b>Hava durumu</b><br>Bulutlu 18°C (İstanbul)</div>
-		<div class="notification" onclick="changeBG()">Arkaplanı değiştirmek için basın (deneysel)</div>
+		<div class="notification">
+			<b>
+				<i style='background-image:url("icons/spotify-black.png");'></i>
+				Requiem, K. 626: Lacrimosa
+			</b><br>
+			Wolfgang Amadeus Mozart, London..
+			<span class="pl" style='background-image:url("icons/page-last-black.png")'></span>
+			<span class="pl" style='background-image:url("icons/pause-black.png")'></span>
+			<span class="pl" style='background-image:url("icons/page-last-left-black.png")'></span>
+			<style>
+			.pl{
+				display: inline-block;
+				width:2em;
+				height:2em;
+				background-size:2em 2em;
+				float:right;
+				position: relative;
+				margin-top: -1em;
+				opacity: .85;
+				cursor:pointer;
+			}
+			</style>
+		</div>
+
+		<div class="notification" style="width:12em;float:left">
+			<b>
+				<i style='background-image:url("icons/battery-black.png");'></i>
+				Pil %100
+			</b><br>
+			Batarya tam dolu!
+		</div>
+
+		<div class="notification" style="width:12em;float:right">
+			<b>
+				<i style='background-image:url("icons/weather-partlycloudy-black.png");'></i>
+				Hava durumu
+			</b><br>
+			Parçalı bulutlu 18°C
+		</div>
+
+		<div class="notification" onclick="changeBG()">Arkaplanı değiştirmek için dokunun (deneysel)</div>
 	</div>
 
 	<label id="open" onclick="home()">Açmak için "boşluk" tuşuna basın yada dokunun</label>
