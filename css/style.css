@@ -157,12 +157,24 @@ select:hover{
 	color:rgb(0,0,0,.9);
 }
 .notification{
+	display: inline-block;
+	width:100%;
 	box-shadow: .2em .2em 1em rgb(0,0,0,.5);
 	margin-bottom: 1em;
 	text-align: left;
 	border-radius: 1em;
 	padding:1em;
 	background-color: var(--button-bg)
+}
+.notification b i{
+	width:1.2em;
+	height:1.2em;
+	background-size: 1.2em 1.2em;
+	display: inline-block;
+	margin-right: .4em;
+	margin-bottom: -.2em;
+	opacity: .85;
+	background-position: center center;
 }
 
 #go-home{
